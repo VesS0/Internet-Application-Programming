@@ -34,8 +34,24 @@ public class LoginController {
     private String password;
 
     private int alertType;
-    private String message;
+    private String message, licence,severity="info";
     static public User user;
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
+
+    public String getLicence() {
+        return licence;
+    }
+
+    public void setLicence(String licence) {
+        this.licence = licence;
+    }
 
     public static User getUser() {
         return user;
@@ -112,6 +128,7 @@ public class LoginController {
     }
     public String userLogin() {
         User loggedUser = getUserFromUsername(username);
+         severity = "danger";
         if(loggedUser==null)
         {
             message = "There is no user with these credidetials";
@@ -123,6 +140,7 @@ public class LoginController {
            return "index.xhtml";
         }
         this.user = loggedUser;
+        severity = "success";
         switch (user.getUserTypeOfUser())
         {
             case "Employee":
@@ -133,7 +151,7 @@ public class LoginController {
                 List<Pilotlicence> licences= GetPilotLicences(user);
                 if (licences == null)
                 {
-                    return "PilotLicence.xhtml";
+                    return "pilotLicence.xhtml";
                 }
                 return "Pilot.xhtml";
         }
@@ -165,6 +183,42 @@ public class LoginController {
     public String searchStuff()
     {
         return "guestSearch.xhtml";
+    }
+    
+    public static boolean isValidLicence(String licence)
+    {
+        // TODO: regex
+        return true;
+    }
+    
+    public String addLicence()
+    {
+        if (isValidLicence(licence))
+        {
+            PilotlicenceId pilLilId = new PilotlicenceId();
+            pilLilId.setPilotLicenceUserName(LoginController.user.getUserUserName());
+            pilLilId.setPilotLicenceLicence(licence);
+            
+            Pilotlicence pilLil = new Pilotlicence();
+            pilLil.setId(pilLilId);
+            pilLil.setUser(LoginController.user);
+            
+            SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
+            Session session = sessionFactory.openSession();
+            try{
+                session.beginTransaction();
+                session.save(pilLil);
+                session.getTransaction().commit();
+            } catch (Exception e) {
+            if (session.getTransaction() != null) {
+            session.getTransaction().commit();
+            }
+            } finally {
+                session.close();
+            } 
+            return "Pilot.xhtml";
+        }
+        return "pilotLicence.xhtml";
     }
 
 }

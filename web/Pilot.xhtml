@@ -13,30 +13,30 @@
         <ui:composition template="templates/ControlWindowTemplate.xhtml">
             <ui:define name="content">
                 <b:row>
-                    <b:alert closable="true" rendered="#{pilot.message!=null}" >#{pilot.message}</b:alert>
+                    <b:alert severity="#{pilot.severity}" closable="true" rendered="#{pilot.message!=null}" >#{pilot.message}</b:alert>
                 </b:row>
                 <b:container fluid="true">
                     <b:row style="margin-top: 70px">
-                        <b:column  medium-screen="6" offset="0">
+                        <b:column  medium-screen="9">
                             <h:form>
                                 <b:dataTable  ajax="false" searching="false" value="#{pilot.flights}" var="flight">
                                     <b:dataTableColumn value="#{flight.flightId}" />
-                                    <b:dataTableColumn value="#{flight.airportByFlightAirportIdTo.airportId}" />
+                                   <b:dataTableColumn value="#{flight.airportByFlightAirportIdTo.airportId}" />
                                     <b:dataTableColumn value="#{flight.airportByFlightAirportIdFrom.airportId}" />
                                     <b:dataTableColumn>
                                         <b:column>
                                             <h:selectOneMenu value="#{pilot.status}">
-                                                <f:selectItem value="PlaneTookOff"
+                                                <f:selectItem
                                                                itemValue="PlaneTookOff" itemLabel="PlaneTookOff"/>
-                                                <f:selectItem value="PlanChange"
+                                                <f:selectItem 
                                                                itemValue="PlanChange" itemLabel="PlanChange"/>
-                                                <f:selectItem value="LandingPreparations"
+                                                <f:selectItem 
                                                                itemValue="LandingPreparations" itemLabel="LandingPreparations"/>
-                                                <f:selectItem value="PlanLanded"
+                                                <f:selectItem 
                                                                itemValue="PlanLanded" itemLabel="PlanLanded"/>
-                                                <f:selectItem value="ForcedLanding"
+                                                <f:selectItem 
                                                                itemValue="ForcedLanding" itemLabel="ForcedLanding"/>
-                                                <f:selectItem value="FlightCanceled"
+                                                <f:selectItem 
                                                                itemValue="FlightCanceled" itemLabel="FlightCanceled"/>
                                             </h:selectOneMenu>
                                         </b:column>
@@ -47,10 +47,10 @@
                                 </b:dataTable>
                             </h:form>
                         </b:column>
-                         <b:column  medium-screen="6">
+                         <b:column  medium-screen="9">
                             <h:form>
                             <b:row>
-                                 <b:column medium-screen="6" offset="4">
+                                <b:column medium-screen="6">
                                    <h:selectOneMenu value="#{pilot.selectedAirline}">
                                         <f:selectItems value="#{pilot.availableAirlines}" var="airline" 
                                                        itemValue="#{airline.airlineId}" itemLabel="#{airline.airlineName}"/>
@@ -58,7 +58,9 @@
                                 </b:column>
                              </b:row>
                                 <b:row>
+                                    <b:column medium-screen="6">
                                     <b:commandButton ajax="false" value="Change Company" action="#{pilot.changeCompany()}"/>
+                                </b:column >
                                 </b:row>
                             </h:form>
                         </b:column>

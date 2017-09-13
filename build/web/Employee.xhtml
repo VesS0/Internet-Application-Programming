@@ -13,7 +13,7 @@
         <ui:composition template="templates/ControlWindowTemplate.xhtml">
             <ui:define name="content">
                 <b:row>
-                    <b:alert closable="true" rendered="#{employee.message!=null}" >#{employee.message}</b:alert>
+                    <b:alert severity="#{employee.severity}" closable="true" rendered="#{employee.message!=null}" >#{employee.message}</b:alert>
                 </b:row>
                 <b:container fluid="true">
                     <b:row style="margin-top: 70px">

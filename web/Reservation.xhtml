@@ -12,7 +12,7 @@
         <ui:composition template="templates/ControlWindowTemplate.xhtml">
             <ui:define name="content">
                 <b:row>
-                    <b:alert closable="true" rendered="#{reservation.message!=null}">#{reservation.message}</b:alert>
+                    <b:alert severity="#{reservation.severity}" closable="true" rendered="#{reservation.message!=null}" >#{reservation.message}</b:alert>
                 </b:row>
                 <b:container fluid="true"> 
                     <h:form>

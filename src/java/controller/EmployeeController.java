@@ -23,7 +23,16 @@ import org.hibernate.SessionFactory;
 public class EmployeeController {
     private List<Flight> flights;
     private String message;
+    private String severity="info";
 
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
+    
     public List<Flight> getFlights() {
         return flights;
     }

@@ -25,7 +25,15 @@ import org.hibernate.Transaction;
 @ManagedBean(name = "changePasswordController")
 @RequestScoped
 public class ChangePasswordController {
-    private String userName, password, newPassword, newPassword2, message;
+    private String userName, password, newPassword, newPassword2, message, severity="info";
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
 
     public String getUserName() {
         return userName;
@@ -70,7 +78,7 @@ public class ChangePasswordController {
     public void ChangePassword()
     {
         User user = LoginController.getUserFromUsername(userName);
-        
+        severity="danger";
         if (user==null)
         {
             message = "There is no user with provided credentials";
@@ -95,9 +103,11 @@ public class ChangePasswordController {
             session.getTransaction().commit();
         } catch (Exception e) {
            message="Unexpected exception";
+           severity="danger";
         } finally {
             session.close();
         }
          message = "Password successfully updated.";
+         severity="success";
     }
 }

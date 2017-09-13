@@ -9,7 +9,7 @@
     <h:body>
         <h:form>
             <b:row>
-                <b:alert closable="true" rendered="#{loginController.message!=null}" >#{loginController.message}</b:alert>
+                <b:alert closable="true" severity="#{loginController.severity}"  rendered="#{loginController.message!=null}" >#{loginController.message}</b:alert>
             </b:row>
             <b:row>
                 <b:column medium-screen="6" offset="4">

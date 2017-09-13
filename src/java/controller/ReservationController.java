@@ -18,7 +18,15 @@ import org.hibernate.SessionFactory;
 @ManagedBean(name = "reservation")
 @RequestScoped
 public class ReservationController {
-    private String name,surname,passport,bankAccount, generatedPassword, message;
+    private String name,surname,passport,bankAccount, generatedPassword, message, severity="info";
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
 
     public String getGeneratedPassword() {
         return generatedPassword;
@@ -78,12 +86,14 @@ public class ReservationController {
             session.getTransaction().commit();
         } catch (Exception e) {
             if (session.getTransaction() != null) {
+                severity="danger";
                 message = "Reservation failed!";
                 session.getTransaction().commit();
             }
             } finally {
                 session.close();
             }
+        severity="success";
         generatedPassword= "9302-9201";
         message = "Reservation successfull! Your generated password is: "+generatedPassword;
     }

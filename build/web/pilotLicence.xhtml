@@ -13,17 +13,20 @@
         <ui:composition template="templates/ControlWindowTemplate.xhtml">
             <ui:define name="content">
                 <b:row>
-                    <b:message > Please enter your Pilot Licence.</b:message>
+                    Please enter your Pilot Licence.
                 </b:row>
                 <b:container fluid="true">
                     <b:row style="margin-top: 70px">
                          <b:column  medium-screen="6">
                             <h:form>
-                                <b:row
-                                    <b:inputText ajax="false" value="Pilot Licence" value="#{pilot.licence}"/>
+                                <b:row>
+                                    <p:inputText  requiredMessage="You need to enter licence" required="true" value="#{loginController.licence}" 
+                                                  validatorMessage="Licence must be 9 characters long">
+                                        <f:validateLength minimum="9" maximum="9"/>
+                                    </p:inputText> 
                                 </b:row>
-                                 <b:row
-                                    <b:commandButton ajax="false" value="Enter pilot licence" action="#{pilot.addLicence()}"/>
+                                <b:row>
+                                    <b:commandButton ajax="false" value="Enter pilot licence" action="#{loginController.addLicence()}"/>
                                  </b:row>
                             </h:form>
                         </b:column>

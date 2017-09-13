@@ -28,8 +28,16 @@ import org.hibernate.Transaction;
 public class RegisterController {
     private User user = new User();
     private static List<Airline> availableAirlines;
-    private String message;
+    private String message, severity="info";
     private int airline;
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
 
     public int getAirline() {
         return airline;
@@ -80,7 +88,7 @@ public class RegisterController {
     public void registerUser()
     {
         User userExists = LoginController.getUserFromUsername(user.getUserUserName());
-        
+        severity = "danger";
         if (userExists!=null)
         {
             message = "User with same credentials already exists";
@@ -101,6 +109,7 @@ public class RegisterController {
             session.beginTransaction();
             session.save(user);
             session.getTransaction().commit();
+            severity="success";
             message = "Your registration is successfull! Congratz!";
         } catch (Exception e) {
             if (session.getTransaction() != null) {

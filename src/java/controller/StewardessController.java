@@ -28,9 +28,17 @@ public class StewardessController {
 
     private List<Flight> flights;
     private Flight flight;
-    private String message;
+    private String message, severity="info";
     private List<Airline> availableAirlines = null;
     private int selectedAirlineId;
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
 
     public int getSelectedAirlineId() {
         return selectedAirlineId;
@@ -118,6 +126,7 @@ public class StewardessController {
             session.beginTransaction();
             session.update(LoginController.user);
             session.getTransaction().commit();
+            severity="success";
             message = "Company successfully changed!";
         } catch (Exception e) {
             if (session.getTransaction() != null) {

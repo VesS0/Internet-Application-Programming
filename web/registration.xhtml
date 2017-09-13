@@ -12,7 +12,7 @@
         <ui:composition template="templates/ControlWindowTemplate.xhtml">
             <ui:define name="content">
                 <b:row>
-                    <b:alert closable="true" rendered="#{registerController.message!=null}">#{registerController.message}</b:alert>
+                    <b:alert closable="true" severity="#{registerController.severity}" rendered="#{registerController.message!=null}">#{registerController.message}</b:alert>
                 </b:row>
                 <b:container fluid="true">
                      <h:form>

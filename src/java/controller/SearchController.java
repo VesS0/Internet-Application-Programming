@@ -28,12 +28,20 @@ import org.hibernate.SessionFactory;
 @SessionScoped
 public class SearchController {
 
-    private String twoWayFlight = "OneWay", flyTo, flyFrom;
+    private String twoWayFlight = "OneWay", flyTo, flyFrom, success="info";
     private int numOfPeople = 1;
     private boolean directFlight;
     private List<Flight> searchResults;
     private Date startDate, endDate;
     private Flight selectedFlight;
+
+    public String getSuccess() {
+        return success;
+    }
+
+    public void setSuccess(String success) {
+        this.success = success;
+    }
 
     public Flight getSelectedFlight() {
         return selectedFlight;

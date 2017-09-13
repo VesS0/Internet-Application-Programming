@@ -24,12 +24,21 @@ import org.hibernate.SessionFactory;
 @ManagedBean(name = "pilot")
 @RequestScoped
 public class PilotController {
-    private String licence, message;
+    private String  message;
     private List<PilotlicenceId> piloteLicences;
     private List<Airline> availableAirlines;
     private List<Flight> flights;
     private Airline selectedAirline;
     private String status;
+    private String severity = "info";
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
+    }
 
     public String getMessage() {
         return message;
@@ -62,9 +71,11 @@ public class PilotController {
         Session session = sessionFactory.openSession();
         try{
             session.beginTransaction();
-            piloteLicences= session.createQuery("from PilotlicenceId ").list();
+           // piloteLicences= session.createQuery("from PilotlicenceId ").list();
             availableAirlines = session.createQuery("from Airline").list();
-            Query query = session.createQuery("from flight fl where fl.userByFlightCopilotId=:myUsername or fl.userByFlightPilotId=:myUsername" );
+            Query query = session.createQuery(
+                    "from Flight fl join fetch fl.userByFlightCopilotId copil "
+                    + "join fetch fl.userByFlightPilotId pil where copil.userUserName=:myUsername or pil.userUserName=:myUsername" );
             query.setParameter("myUsername", LoginController.user.getUserUserName());
             flights = query.list();
             session.getTransaction().commit();
@@ -101,32 +112,6 @@ public class PilotController {
         this.selectedAirline = selectedAirline;
     }
     
-    public String getLicence() {
-        return licence;
-    }
-
-    public void setLicence(String licence) {
-        this.licence = licence;
-    }
-    public String addLicence()
-    {
-        if (isValidLicence(licence))
-        {
-            PilotlicenceId pilLilId = new PilotlicenceId();
-//             get flicence from list ?? piloteLicences  :S??
-            pilLilId.setPilotLicenceUserName(LoginController.user.getUserUserName());
-            pilLilId.setPilotLicenceLicence(licence);
-            
-            Pilotlicence pilLil = new Pilotlicence();
-            pilLil.setUser(LoginController.user);
-            pilLil.setId(pilLilId);
-            LoginController.user.getPilotlicences().add(pilLil);
-            
-            return "Pilot.xhtml";
-        }
-        return "pilotLicence.xhtml";
-    }
-    
     public void changeCompany()
     {
         LoginController.user.setAirline(selectedAirline);
@@ -138,6 +123,7 @@ public class PilotController {
             session.update(LoginController.user);
             session.getTransaction().commit();
             message="Company successfully changed!";
+            severity="success";
         } catch (Exception e) {
         if (session.getTransaction() != null) {
         session.getTransaction().commit();
@@ -147,14 +133,9 @@ public class PilotController {
         } 
     }
     
-        public void updateFlightStatus(Flight flight)
+    public void updateFlightStatus(Flight flight)
     {
-        ;
         message="Successfully updated flight status";
-    }
-    public static boolean isValidLicence(String licence)
-    {
-        // TODO: regex
-        return true;
+        severity="success";
     }
 }
