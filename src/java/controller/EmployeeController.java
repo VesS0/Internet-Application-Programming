@@ -47,6 +47,7 @@ public class EmployeeController {
         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try{
+             session.beginTransaction();
             // Query query = session.createQuery("from flight fl join fetch where fl.userByFlightCopilotId=:myUsername or fl.userByFlightPilotId=:myUsername" );
             // query.setParameter("myUsername", LoginController.user.getUserUserName());
             // flights = query.list();

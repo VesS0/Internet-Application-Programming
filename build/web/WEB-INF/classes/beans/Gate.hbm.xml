@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2017 7:50:40 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Gate" table="gate" catalog="avioflights" optimistic-lock="version">
+        <id name="gateId" type="int">
+            <column name="gate_Id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="airport" class="beans.Airport" fetch="select">
+            <column name="gate_AirportId" length="30" not-null="true" />
+        </many-to-one>
+        <many-to-one name="terminal" class="beans.Terminal" fetch="select">
+            <column name="gate_TerminalId" not-null="true" />
+        </many-to-one>
+        <property name="gateName" type="string">
+            <column name="gate_Name" length="5" not-null="true" />
+        </property>
+        <set name="flightsForFlightGateIdTo" table="flight" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="flight_GateIdTo" />
+            </key>
+            <one-to-many class="beans.Flight" />
+        </set>
+        <set name="flightsForFlightGateIdFrom" table="flight" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="flight_GateIdFrom" />
+            </key>
+            <one-to-many class="beans.Flight" />
+        </set>
+    </class>
+</hibernate-mapping>

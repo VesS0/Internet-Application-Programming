@@ -56,11 +56,12 @@ public class PilotController {
     }
     
     @PostConstruct
-    public void LoadLicencesAndAirlinesAaandMyFlights()
+    public void LoadLicencesAndAirlinesAndMyFlights()
     {
         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try{
+            session.beginTransaction();
             piloteLicences= session.createQuery("from PilotlicenceId ").list();
             availableAirlines = session.createQuery("from Airline").list();
             Query query = session.createQuery("from flight fl where fl.userByFlightCopilotId=:myUsername or fl.userByFlightPilotId=:myUsername" );
@@ -133,6 +134,7 @@ public class PilotController {
         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try{
+            session.beginTransaction();
             session.update(LoginController.user);
             session.getTransaction().commit();
             message="Company successfully changed!";

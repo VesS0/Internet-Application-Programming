@@ -83,7 +83,7 @@ public class LoginController {
         session.beginTransaction();
         List<User> users = null;
         try {
-            Query query = session.createQuery("from User where user_UserName=:username");
+            Query query = session.createQuery("from User where userUserName=:username");
             query.setParameter("username", username);
             users = query.list();            
             session.getTransaction().commit();  
@@ -93,7 +93,23 @@ public class LoginController {
         }
         return (users!=null && users.size()>0)?users.get(0):null;
     }
-    
+    public static List<Pilotlicence> GetPilotLicences(User user)
+    {
+        Session  session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        List<Pilotlicence> licences = null;
+        try {
+            Query query = session.createQuery("from Pilotlicence where user.userUserName=:username");
+            query.setParameter("username", user.getUserUserName());
+            licences = query.list();            
+            session.getTransaction().commit();  
+        } catch (Exception e) {
+        } finally {
+            session.close();
+        }
+        
+        return (licences==null || licences.size()==0 || licences.isEmpty())?null:licences;
+    }
     public String userLogin() {
         User loggedUser = getUserFromUsername(username);
         if(loggedUser==null)
@@ -114,7 +130,8 @@ public class LoginController {
             case "Stewardess":
                 return "Stewardess.xhtml";
             case "Pilot":
-                if (user.getPilotlicences().isEmpty() || user.getPilotlicences().size()==0)
+                List<Pilotlicence> licences= GetPilotLicences(user);
+                if (licences == null)
                 {
                     return "PilotLicence.xhtml";
                 }

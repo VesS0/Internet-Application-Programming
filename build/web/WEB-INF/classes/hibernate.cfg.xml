@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.DerbyDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/avioflights</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password">Admin</property>
+    <mapping resource="beans/Airline.hbm.xml"/>
+    <mapping resource="beans/Rent.hbm.xml"/>
+    <mapping resource="beans/Flightstate.hbm.xml"/>
+    <mapping resource="beans/Radarcenter.hbm.xml"/>
+    <mapping resource="beans/Terminal.hbm.xml"/>
+    <mapping resource="beans/Airport.hbm.xml"/>
+    <mapping resource="beans/Pilotlicence.hbm.xml"/>
+    <mapping resource="beans/Airplane.hbm.xml"/>
+    <mapping resource="beans/Airplanetype.hbm.xml"/>
+    <mapping resource="beans/User.hbm.xml"/>
+    <mapping resource="beans/Flight.hbm.xml"/>
+    <mapping resource="beans/Manufacturer.hbm.xml"/>
+    <mapping resource="beans/Gate.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

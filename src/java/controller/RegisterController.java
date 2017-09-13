@@ -45,7 +45,9 @@ public class RegisterController {
         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try{
+            session.beginTransaction();
             availableAirlines = session.createQuery("from Airline").list(); 
+            session.getTransaction().commit();
         } catch (Exception e) {
         if (session.getTransaction() != null) {
         session.getTransaction().commit();

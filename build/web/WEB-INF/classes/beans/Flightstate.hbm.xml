@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2017 7:50:40 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Flightstate" table="flightstate" catalog="avioflights" optimistic-lock="version">
+        <id name="flightStateId" type="int">
+            <column name="flightState_Id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="flight" class="beans.Flight" fetch="select">
+            <column name="flightState_FlightId" />
+        </many-to-one>
+        <many-to-one name="radarcenter" class="beans.Radarcenter" fetch="select">
+            <column name="flightState_RadarId" />
+        </many-to-one>
+        <property name="flightStateStatus" type="string">
+            <column name="flightState_Status" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

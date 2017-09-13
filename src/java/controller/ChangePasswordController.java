@@ -90,8 +90,8 @@ public class ChangePasswordController {
         Session  session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         try {
-                user.setUserPassword(newPassword);
-                session.update(user);
+            user.setUserPassword(newPassword);
+            session.update(user);
             session.getTransaction().commit();
         } catch (Exception e) {
            message="Unexpected exception";
