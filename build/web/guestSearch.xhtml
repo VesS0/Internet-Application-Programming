@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <title>
+        HELLO MY FRIEND, WELCOME TO YOUR REGISTRATION PAGE. PLEACE PROCEEDE
+    </title>
+    <h:body>
+        <ui:composition template="templates/ControlWindowTemplate.xhtml">
+            <ui:define name="content">
+                <b:container fluid="true">
+                    <b:row style="margin-top: 70px">
+                       
+                        <b:column medium-screen="6">
+                            <h:form>
+                                <b:row>
+                                    <b:column>
+                                        <b:selectBooleanCheckbox value="#{searchController.directFlight}" label="Only direct flights">
+
+                                        </b:selectBooleanCheckbox>
+
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="0"  >
+                                        Enter number of people
+                                        <p:spinner size="1" min="1" max="8" style="width:75px" value="#{searchController.numOfPeople}"/>
+                                       <!-- <h:selectOneMenu value="#//{searchController.numOfPeople}" converter="javax.faces.Integer">
+                                            <f:selectItem itemValue="1" itemLabel="1"/>
+                                            <f:selectItem itemValue="2" itemLabel="2"/>
+                                            <f:selectItem itemValue="3" itemLabel="3"/>
+                                            <f:selectItem itemValue="4" itemLabel="4"/>
+                                            <f:selectItem itemValue="5" itemLabel="5"/>
+                                            <f:selectItem itemValue="6" itemLabel="6"/>
+                                            <f:selectItem itemValue="7" itemLabel="7"/>
+                                            <f:selectItem itemValue="8" itemLabel="8"/>
+                                        </h:selectOneMenu>-->
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="0">
+                                        <b:inputText label="Fly from" renderLabel="true"  placeholder="flyfrom" 
+                                                     value="#{searchController.flyFrom}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="0">
+                                        <b:inputText label="Fly to" renderLabel="true"  placeholder="flyto" 
+                                                     value="#{searchController.flyTo}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="0">
+                                        <b:radiobutton value="#{searchController.twoWayFlight}">
+                                            <f:selectItem itemValue="OneWay" itemLabel="OneWay"/>
+                                            <f:selectItem itemValue="TwoWay" itemLabel="TwoWay"/>
+                                        </b:radiobutton>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column>
+                                        <b:dateTimePicker allow-input-toggle="true"
+                                                          mode="false"
+                                                          side-by-side="false"
+                                                          show-date="true"
+                                                          show-time="false"
+                                                          use-current="true"
+                                                          value="#{searchController.startDate}">                      
+                                        </b:dateTimePicker>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column>
+                                        <b:dateTimePicker allow-input-toggle="true"
+                                                          mode="false"
+                                                          side-by-side="false"
+                                                          show-date="true"
+                                                          show-time="false"
+                                                          use-current="true"
+                                                          value="#{searchController.endDate}">                             
+                                        </b:dateTimePicker>
+                                    </b:column>
+                                </b:row>
+                                <b:column medium-screen="6" offset="0">
+                                    <b:commandButton  value="Search" style="width:80%;" action="#{searchController.executeSearch()}"/>
+                                </b:column>
+                            </h:form>
+                        </b:column>
+                         <b:column  medium-screen="6">
+                            <h:form>
+                                <b:dataTable  ajax="false" searching="false" value="#{searchController.searchResults}" var="flight">
+                                    <b:dataTableColumn value="#{flight.flightId}" />
+                                    <b:dataTableColumn value="#{flight.airportByFlightAirportIdTo.airportId}" />
+                                    <b:dataTableColumn value="#{flight.airportByFlightAirportIdFrom.airportId}" />
+                                    <b:dataTableColumn value="#{flight.airportByFlightAirportIdFrom.airportId}" />
+                                    <b:dataTableColumn>
+                                        <b:commandButton ajax="false" value="Reserve" action="#{searchController.reserve(flight)}"/>
+                                    </b:dataTableColumn>  
+                                </b:dataTable>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

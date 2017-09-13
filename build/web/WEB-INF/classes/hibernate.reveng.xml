@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="avioflights"/>
+  <table-filter match-name="airplanetype"/>
+  <table-filter match-name="terminal"/>
+  <table-filter match-name="pilotlicence"/>
+  <table-filter match-name="radarcenter"/>
+  <table-filter match-name="rent"/>
+  <table-filter match-name="airline"/>
+  <table-filter match-name="gate"/>
+  <table-filter match-name="airplane"/>
+  <table-filter match-name="user"/>
+  <table-filter match-name="flightstate"/>
+  <table-filter match-name="airport"/>
+  <table-filter match-name="manufacturer"/>
+  <table-filter match-name="flight"/>
+</hibernate-reverse-engineering>

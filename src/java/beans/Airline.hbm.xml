@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 12, 2017 7:50:40 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="beans.Airline" table="airline" catalog="avioflights" optimistic-lock="version">
+        <id name="airlineId" type="int">
+            <column name="airline_Id" />
+            <generator class="assigned" />
+        </id>
+        <property name="airlineName" type="string">
+            <column name="airline_Name" length="30" not-null="true" />
+        </property>
+        <property name="airlineAddress" type="string">
+            <column name="airline_Address" length="30" not-null="true" />
+        </property>
+        <property name="airlineCountry" type="string">
+            <column name="airline_Country" length="30" not-null="true" />
+        </property>
+        <property name="airlineSite" type="string">
+            <column name="airline_Site" length="30" not-null="true" />
+        </property>
+        <property name="airlineEmail" type="string">
+            <column name="airline_Email" length="30" not-null="true" />
+        </property>
+        <set name="rents" table="rent" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Rent_AirlineId" />
+            </key>
+            <one-to-many class="beans.Rent" />
+        </set>
+        <set name="airplanes" table="airplane" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="airplane_AirlineId" not-null="true" />
+            </key>
+            <one-to-many class="beans.Airplane" />
+        </set>
+        <set name="users" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="user_AirlineId" not-null="true" />
+            </key>
+            <one-to-many class="beans.User" />
+        </set>
+    </class>
+</hibernate-mapping>
