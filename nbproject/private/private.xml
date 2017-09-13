@@ -3,24 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/hibernate.cfg.xml</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/beans/Flight.java</file>
+            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/Reservation.xhtml</file>
+            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/controller/StewardessController.java</file>
+            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/changePassword.xhtml</file>
             <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/guestSearch.xhtml</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/beans/Airport.java</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/Pilot.xhtml</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/Stewardess.xhtml</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/guestRegister.xhtml</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/controller/ChangePasswordController.java</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/controller/SearchController.java</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/error.xhtml</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/index.xhtml</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/beans/Airplane.java</file>
             <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/registration.xhtml</file>
             <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/controller/LoginController.java</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/Employee.xhtml</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/beans/User.java</file>
+            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/controller/ReservationController.java</file>
+            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/Stewardess.xhtml</file>
             <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/controller/RegisterController.java</file>
-            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/hibernate.reveng.xml</file>
+            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/web/user.xhtml</file>
+            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/controller/SearchController.java</file>
+            <file>file:/C:/Users/Jelena/Documents/NetBeansProjects/AvioFlights/src/java/controller/ChangePasswordController.java</file>
         </group>
     </open-files>
 </project-private>

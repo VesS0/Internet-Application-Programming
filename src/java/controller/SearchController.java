@@ -82,31 +82,6 @@ public class SearchController {
         Session  session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         try {
-            // airportByFlightExpectedAirportIdTo; airportByFlightAirportIdFrom
-           /* String s="from Flight f join fetch f.airportByFlightExpectedAirportIdTo where ";
-            if(dateSearchStart==null)
-                s+= "c.endDate>= :endDate1 "; 
-            else
-                s+= "c.endDate>= :startDate2 ";
-            if(dateSearchEnd!=null)
-                s+= "and c.startDate<= :endDate2 ";
-            if(nameSearch!=null && !nameSearch.equals(""))
-                s+= "and c.name like :name ";
-            if(subjectSearch!=null && !subjectSearch.equals(""))
-                s+= "and c.subject like :subject ";
-            s+=" order by c.startDate";
-            Query q = session.createQuery(s);
-            if(dateSearchStart==null)
-                q.setParameter("endDate1",new Date(), TemporalType.DATE);
-            if(dateSearchEnd!=null)
-                q.setParameter("endDate2", dateSearchEnd, TemporalType.DATE);
-            if(dateSearchStart!=null)
-                q.setParameter("startDate2",dateSearchStart, TemporalType.DATE);
-            if(nameSearch!=null && !nameSearch.equals(""))
-                q.setParameter("name","%"+ nameSearch+"%");
-            if(subjectSearch!=null && !subjectSearch.equals(""))
-                q.setParameter("subject","%"+ subjectSearch+"%");
-            */
             boolean noFlyFrom = (flyFrom==null || flyFrom.isEmpty());
             boolean noFlyTo = (flyTo==  null || flyTo.isEmpty());
             

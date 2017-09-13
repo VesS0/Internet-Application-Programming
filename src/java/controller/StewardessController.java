@@ -12,6 +12,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,9 +22,18 @@ import org.hibernate.SessionFactory;
  * @author Jelena
  */
 @ManagedBean(name = "stewardess")
-@RequestScoped
+@SessionScoped
 public class StewardessController {
     private List<Flight> flights;
+    private Flight flight;
+
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
 
     public List<Flight> getFlights() {
         return flights;
@@ -50,8 +60,25 @@ public class StewardessController {
             session.close();
         } 
     }
-    public String getDetails()
+    public String getDetails(Flight flight)
     {
-        return null;
+        this.flight=null;
+        SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        try{
+            Query query = session.createQuery(
+                    "from Flight fl join fetch fl.airplane airplane "+
+                    " join fetch airplane.airplanetype airplanetype where fl.flightId=:flightId");
+            query.setParameter("flightId", flight.getFlightId());
+            this.flight = (Flight) query.list().get(0);
+        } catch (Exception e) {
+        if (session.getTransaction() != null) {
+        session.getTransaction().commit();
+        }
+        } finally {
+            session.close();
+        } 
+        
+        return "stewardessFlightDetails";
     }
 }

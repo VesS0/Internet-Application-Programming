@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -28,7 +27,7 @@ import org.hibernate.cfg.Configuration;
 
 
 @ManagedBean(name = "loginController")
-@SessionScoped
+@RequestScoped
 public class LoginController {
 
     private String username;
@@ -36,10 +35,19 @@ public class LoginController {
 
     private int alertType;
     private String message;
-    
-    @ManagedProperty(value = "#{user}")
     static public User user;
 
+    public static User getUser() {
+        return user;
+    }
+
+    public static void setUser(User user) {
+        LoginController.user = user;
+    }
+    
+   /* @ManagedProperty(value = "#{l}")
+    
+*/
 
     public String getUsername() {
         return username;
@@ -98,10 +106,11 @@ public class LoginController {
             message = "Password does not match with username";
            return "index.xhtml";
         }
-        
+        this.user = user;
         switch (user.getUserTypeOfUser())
         {
             case "Employee":
+                
                 return "Employee.xhtml";
             case "Stewardess":
                 return "Stewardess.xhtml";
