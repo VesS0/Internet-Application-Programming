@@ -5,6 +5,7 @@
  */
 package controller;
 
+import beans.Airline;
 import beans.Flight;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,7 +27,34 @@ import org.hibernate.SessionFactory;
 public class StewardessController {
     private List<Flight> flights;
     private Flight flight;
+    private String message;
+    private List<Airline> availableAirlines;
+    private Airline selectedAirline;
 
+    public List<Airline> getAvailableAirlines() {
+        return availableAirlines;
+    }
+
+    public void setAvailableAirlines(List<Airline> availableAirlines) {
+        this.availableAirlines = availableAirlines;
+    }
+
+    public Airline getSelectedAirline() {
+        return selectedAirline;
+    }
+
+    public void setSelectedAirline(Airline selectedAirline) {
+        this.selectedAirline = selectedAirline;
+    }
+    
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+    
     public Flight getFlight() {
         return flight;
     }
@@ -42,8 +70,10 @@ public class StewardessController {
     public void setFlights(List<Flight> flights) {
         this.flights = flights;
     }
+    
+    
     @PostConstruct
-    public void LoadFlights()
+    public void LoadFlightsAndAirlines()
     {
         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -52,6 +82,27 @@ public class StewardessController {
                     + "or flight_StewardessId_3=:myName or flight_StewardessId_4=:myName or flight_StewardessId_5=:myName");
             query.setParameter("myName", LoginController.user.getUserUserName());
             flights = query.list();
+            availableAirlines = session.createQuery("from Airline").list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        if (session.getTransaction() != null) {
+        session.getTransaction().commit();
+        }
+        } finally {
+            session.close();
+        } 
+    }
+    
+        public void changeCompany()
+    {
+        LoginController.user.setAirline(selectedAirline);
+        
+        SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        try{
+            session.update(LoginController.user);
+            session.getTransaction().commit();
+            message="Company successfully changed!";
         } catch (Exception e) {
         if (session.getTransaction() != null) {
         session.getTransaction().commit();

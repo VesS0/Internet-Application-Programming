@@ -12,8 +12,26 @@
     <h:body>
         <ui:composition template="templates/ControlWindowTemplate.xhtml">
             <ui:define name="content">
+                              <b:row>
+                    <b:alert closable="true" rendered="#{stewardess.message!=null}" >#{stewardess.message}</b:alert>
+                </b:row>
                 <b:container fluid="true">
-                    <b:row style="margin-top: 70px">
+                      <b:row style="margin-top: 70px">
+                        <b:column medium-screen="6" offset="0">
+                            <h:form>
+                            <b:row>
+                                 <b:column medium-screen="6" offset="4">
+                                   <h:selectOneMenu value="#{stewardess.selectedAirline}">
+                                        <f:selectItems value="#{stewardess.availableAirlines}" var="airline" 
+                                                       itemValue="#{airline.airlineId}" itemLabel="#{airline.airlineName}"/>
+                                   </h:selectOneMenu>
+                                </b:column>
+                             </b:row>
+                                <b:row>
+                                    <b:commandButton ajax="false" value="Change Company" action="#{stewardess.changeCompany()}"/>
+                                </b:row>
+                            </h:form>
+                        </b:column>
                          <b:column  medium-screen="6">
                             <h:form>
                                 <b:dataTable  ajax="false" searching="false" value="#{stewardess.flights}" var="flight">

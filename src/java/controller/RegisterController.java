@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -43,7 +44,15 @@ public class RegisterController {
     {
         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
-        availableAirlines = session.createQuery("from Airline").list();  
+        try{
+            availableAirlines = session.createQuery("from Airline").list(); 
+        } catch (Exception e) {
+        if (session.getTransaction() != null) {
+        session.getTransaction().commit();
+        }
+        } finally {
+            session.close();
+        }   
     }
     
     public List<Airline> getAvailableAirlines() {

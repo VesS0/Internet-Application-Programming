@@ -1,12 +1,71 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Pilot</title>
-    </h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <title>
+        Stewardess
+    </title>
     <h:body>
-        Hello from Pilot
+        <ui:composition template="templates/ControlWindowTemplate.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:alert closable="true" rendered="#{pilot.message!=null}" >#{pilot.message}</b:alert>
+                </b:row>
+                <b:container fluid="true">
+                    <b:row style="margin-top: 70px">
+                        <b:column  medium-screen="6" offset="0">
+                            <h:form>
+                                <b:dataTable  ajax="false" searching="false" value="#{pilot.flights}" var="flight">
+                                    <b:dataTableColumn value="#{flight.flightId}" />
+                                    <b:dataTableColumn value="#{flight.airportByFlightAirportIdTo.airportId}" />
+                                    <b:dataTableColumn value="#{flight.airportByFlightAirportIdFrom.airportId}" />
+                                    <b:dataTableColumn>
+                                        <b:column>
+                                            <h:selectOneMenu value="#{pilot.status}">
+                                                <f:selectItem value="PlaneTookOff"
+                                                               itemValue="PlaneTookOff" itemLabel="PlaneTookOff"/>
+                                                <f:selectItem value="PlanChange"
+                                                               itemValue="PlanChange" itemLabel="PlanChange"/>
+                                                <f:selectItem value="LandingPreparations"
+                                                               itemValue="LandingPreparations" itemLabel="LandingPreparations"/>
+                                                <f:selectItem value="PlanLanded"
+                                                               itemValue="PlanLanded" itemLabel="PlanLanded"/>
+                                                <f:selectItem value="ForcedLanding"
+                                                               itemValue="ForcedLanding" itemLabel="ForcedLanding"/>
+                                                <f:selectItem value="FlightCanceled"
+                                                               itemValue="FlightCanceled" itemLabel="FlightCanceled"/>
+                                            </h:selectOneMenu>
+                                        </b:column>
+                                        <b:column>
+                                            <b:commandButton ajax="false" value="Update flight status" action="#{pilot.updateFlightStatus(flight)}"/>
+                                        </b:column>
+                                    </b:dataTableColumn> 
+                                </b:dataTable>
+                            </h:form>
+                        </b:column>
+                         <b:column  medium-screen="6">
+                            <h:form>
+                            <b:row>
+                                 <b:column medium-screen="6" offset="4">
+                                   <h:selectOneMenu value="#{pilot.selectedAirline}">
+                                        <f:selectItems value="#{pilot.availableAirlines}" var="airline" 
+                                                       itemValue="#{airline.airlineId}" itemLabel="#{airline.airlineName}"/>
+                                   </h:selectOneMenu>
+                                </b:column>
+                             </b:row>
+                                <b:row>
+                                    <b:commandButton ajax="false" value="Change Company" action="#{pilot.changeCompany()}"/>
+                                </b:row>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

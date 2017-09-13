@@ -95,26 +95,29 @@ public class LoginController {
     }
     
     public String userLogin() {
-        User user = getUserFromUsername(username);
-        if(user==null)
+        User loggedUser = getUserFromUsername(username);
+        if(loggedUser==null)
         {
             message = "There is no user with these credidetials";
             return "index.xthml";
         }
-        if (!user.getUserPassword().equals(password))
+        if (!loggedUser.getUserPassword().equals(password))
         {
             message = "Password does not match with username";
            return "index.xhtml";
         }
-        this.user = user;
+        this.user = loggedUser;
         switch (user.getUserTypeOfUser())
         {
             case "Employee":
-                
                 return "Employee.xhtml";
             case "Stewardess":
                 return "Stewardess.xhtml";
             case "Pilot":
+                if (user.getPilotlicences().isEmpty() || user.getPilotlicences().size()==0)
+                {
+                    return "PilotLicence.xhtml";
+                }
                 return "Pilot.xhtml";
         }
         
