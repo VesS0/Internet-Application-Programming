@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <title>
+        Stewardess
+    </title>
+    <h:body>
+        <ui:composition template="templates/ControlWindowTemplate.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:alert closable="true" severity="#{adminreg.severity}" rendered="#{adminreg.message!=null}" >#{adminreg.message}</b:alert>
+                </b:row>
+                <b:container fluid="true">
+                    <b:row style="margin-top: 70px">
+                        <b:column  medium-screen="6">
+                            <h:form>
+                                <b:dataTable  ajax="false" searching="false" value="#{adminreg.users}" var="user">
+                                    <b:dataTableColumn value="#{user.userUserName}"/>
+                                    <b:dataTableColumn value="#{user.userSurname}" />
+                                    <b:dataTableColumn value="#{user.userEmail}" />
+                                    <b:dataTableColumn>
+                                        <b:commandButton ajax="true" value="Approve" action="#{adminreg.approveUser(user)}"/>
+                                    </b:dataTableColumn> 
+                                    <b:dataTableColumn>
+                                        <b:commandButton ajax="true" value="Disapprove" action="#{adminreg.disapproveUser(user)}"/>
+                                    </b:dataTableColumn> 
+                                </b:dataTable>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

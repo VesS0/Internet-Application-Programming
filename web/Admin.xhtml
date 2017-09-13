@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <title>
+        Stewardess
+    </title>
+    <h:body>
+        <ui:composition template="templates/ControlWindowTemplate.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:alert severity="#{loginController.severity}" closable="true" rendered="#{loginController.message!=null}" >#{loginController.message}</b:alert>
+                </b:row>
+                <b:container fluid="true">
+                    <b:row style="margin-top: 70px">
+                        <b:form>
+                            <b:row>
+                                <b:column medium-screen="6">
+                                    <b:commandButton ajax="false" value="Administer registrations" action="AdminRegistrations.xhtml"/>
+                                </b:column >
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="6">
+                                    <b:commandButton ajax="false" value="Administer airports"  action="AdminAirports.xhtml"/>
+                                </b:column >
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="6">
+                                    <b:commandButton ajax="false" value="Administer airlines" action="AdminAirlines.xhtml"/>
+                                </b:column >
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="6">
+                                    <b:commandButton ajax="false" value="Add licence to pilots"  action="AdminLicences.xhtml"/>
+                                </b:column >
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="6">
+                                    <b:commandButton ajax="false" value="Administer airplanes" action="AdminAirplanes.xhtml"/>
+                                </b:column >
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="6">
+                                    <b:commandButton ajax="false" value="Administer flights" action="AdminFlights.xhtml"/>
+                                </b:column >
+                            </b:row>
+                        </b:form>
+                    </b:row>
+                </b:container>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

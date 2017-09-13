@@ -154,6 +154,8 @@ public class LoginController {
                     return "pilotLicence.xhtml";
                 }
                 return "Pilot.xhtml";
+            case "Admin":
+                return "Admin.xhtml";
         }
         
         return "index.xthml";
@@ -168,14 +170,12 @@ public class LoginController {
     {
         return "changePassword.xhtml";
     }
-    public void CreateUser(User newUser)
+    
+    public String goTo(String str)
     {
-        ;
+        return str;
     }
-    public void CreateUser()
-    {
-        ;
-    }
+    
     public void LogOut()
     {
         // user=null;
