@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 /**
  *
@@ -24,7 +25,48 @@ public class AdminAirlineController {
     private String message,severity="info";
     private List<Airline> airlines;
     private List<Airline> newAirlines = new ArrayList<Airline>();
+    private String airlineSite,airlineEmail,airlineCountry,airlineAddress,airlineName;
 
+    public String getAirlineSite() {
+        return airlineSite;
+    }
+
+    public void setAirlineSite(String airlineSite) {
+        this.airlineSite = airlineSite;
+    }
+
+    public String getAirlineEmail() {
+        return airlineEmail;
+    }
+
+    public void setAirlineEmail(String airlineEmail) {
+        this.airlineEmail = airlineEmail;
+    }
+
+    public String getAirlineCountry() {
+        return airlineCountry;
+    }
+
+    public void setAirlineCountry(String airlineCountry) {
+        this.airlineCountry = airlineCountry;
+    }
+
+    public String getAirlineAddress() {
+        return airlineAddress;
+    }
+
+    public void setAirlineAddress(String airlineAddress) {
+        this.airlineAddress = airlineAddress;
+    }
+
+    public String getAirlineName() {
+        return airlineName;
+    }
+
+    public void setAirlineName(String airlineName) {
+        this.airlineName = airlineName;
+    }
+    
     public String getMessage() {
         return message;
     }
@@ -96,12 +138,50 @@ public class AdminAirlineController {
             session.close();
         } 
     }
+    public int getNextFreeId()
+    {
+        int free=0;
+        SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        try{
+            session.beginTransaction();
+            free = (int) session.createQuery("select MAX(airlineId) from Airline ").list().get(0);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        if (session.getTransaction() != null) {
+        session.getTransaction().commit();
+        }
+        } finally {
+            session.close();
+        } 
+        
+        return free+1;
+    }
     
     public void addNewArline()
     {
-        Airline airline = new Airline();
-        airlines.add(airline);
-        newAirlines.add(airline);
+        Airline airline;// AirlineVesa
+        airline = new Airline(getNextFreeId(), airlineName, airlineAddress, airlineCountry ,airlineSite,airlineEmail);
+        // newAirlines.add(airline);
+       // airlines.add(airline);//
+        // save(airline); 
+         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+        try{
+            
+            
+                session.save(airline);
+
+            
+            tx.commit();
+        } catch (Exception e) {
+        if (session.getTransaction() != null) {
+        session.getTransaction().commit();
+        }
+        } finally {
+            session.close();
+        }
     }
         
 }

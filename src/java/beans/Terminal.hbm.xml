@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 12, 2017 7:50:40 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 14, 2017 1:54:00 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="beans.Terminal" table="terminal" catalog="avioflights" optimistic-lock="version">
         <id name="terminalId" type="int">
             <column name="terminal_Id" />
             <generator class="assigned" />
         </id>
+        <many-to-one name="airport" class="beans.Airport" fetch="select">
+            <column name="terminal_AirportId" length="30" />
+        </many-to-one>
         <property name="terminalNaziv" type="string">
             <column name="terminal_Naziv" length="45" />
-        </property>
-        <property name="terminalAirportId" type="string">
-            <column name="terminal_AirportId" length="30" />
         </property>
         <set name="flightsForFlightTerminalIdTo" table="flight" inverse="true" lazy="true" fetch="select">
             <key>

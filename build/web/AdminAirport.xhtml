@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <title>
+        Stewardess
+    </title>
+    <h:body>
+        <ui:composition template="templates/ControlWindowTemplate.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:alert closable="true" severity="#{adminairport.severity}" rendered="#{adminairport.message!=null}" >#{adminairport.message}</b:alert>
+                </b:row>
+                <b:container fluid="true">
+                    <b:row style="margin-top: 70px">
+                        <b:column  medium-screen="6">
+                            
+                                <h:form>
+                                    <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                            <b:inputText label="Airport ID" required="true" renderLabel="true"  placeholder="Name" 
+                                                         value="#{adminairport.airport.airportId}"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                            <b:inputText label="Airport Name" required="true" renderLabel="true"  placeholder="Name" 
+                                                         value="#{adminairport.airport.airportName}"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                            <b:inputText label="Address" required="true" renderLabel="true"  placeholder="Address" 
+                                                         value="#{adminairport.airport.airportCity}"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                            <b:inputText label="Country" required="true" renderLabel="true"  placeholder="Country" 
+                                                         value="#{adminairport.airport.airportCountry}"/>
+                                        </b:column>
+                                    </b:row>
+                                    <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                            Pists Number
+                                            <p:spinner size="1" min="1" max="8" style="width:75px" value="#{adminairport.airport.airportPistsNumber}"/>
+                                        </b:column>
+                                    </b:row>
+                                     <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                            <b:commandButton ajax="false" value="Add new Airport" action="#{adminairport.addNewAirport()}"/>
+                                        </b:column>
+                                    </b:row>
+                                </h:form>
+                                <h:form>
+                                    <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                            <b:inputText label="Terminal Name" required="true" renderLabel="true"  placeholder="Name" 
+                                                         value="#{adminairport.terminalName}"/>
+                                        </b:column>
+                                        </b:row>
+                                        <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                        <b:commandButton ajax="false" value="Add new Terminal" action="#{adminairport.addTerminal()}"/>
+                                        </b:column>
+                                    </b:row>
+                                    
+                                </h:form>
+                                <h:form>
+                                    <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                            <b:inputText label="Gate Name" required="true" renderLabel="true"  placeholder="Name" 
+                                                         value="#{adminairport.gateName}"/>
+                                        </b:column>
+                                        </b:row>
+                                        <b:row>
+                                        <b:column medium-screen="6" offset="4">
+                                        <b:commandButton ajax="false" value="Add new Gate" action="#{adminairport.addGate()}"/>
+                                         </b:column>
+                                    </b:row>
+                                </h:form>
+                            
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

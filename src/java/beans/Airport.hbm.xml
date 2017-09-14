@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Sep 12, 2017 7:50:40 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Sep 14, 2017 1:54:00 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="beans.Airport" table="airport" catalog="avioflights" optimistic-lock="version">
         <id name="airportId" type="string">
@@ -23,6 +23,12 @@
         <property name="airportTerminalsNumber" type="int">
             <column name="airport_TerminalsNumber" not-null="true" />
         </property>
+        <set name="terminals" table="terminal" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="terminal_AirportId" length="30" />
+            </key>
+            <one-to-many class="beans.Terminal" />
+        </set>
         <set name="flightsForFlightAirportIdFrom" table="flight" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="flight_AirportIdFrom" length="30" not-null="true" />

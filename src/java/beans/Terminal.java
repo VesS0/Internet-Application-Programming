@@ -1,5 +1,5 @@
 package beans;
-// Generated Sep 12, 2017 7:50:39 PM by Hibernate Tools 4.3.1
+// Generated Sep 14, 2017 1:53:59 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,8 +12,8 @@ public class Terminal  implements java.io.Serializable {
 
 
      private int terminalId;
+     private Airport airport;
      private String terminalNaziv;
-     private String terminalAirportId;
      private Set<Flight> flightsForFlightTerminalIdTo = new HashSet<Flight>(0);
      private Set<Flight> flightsForFlightTerminalIdFrom = new HashSet<Flight>(0);
      private Set<Gate> gates = new HashSet<Gate>(0);
@@ -25,10 +25,10 @@ public class Terminal  implements java.io.Serializable {
     public Terminal(int terminalId) {
         this.terminalId = terminalId;
     }
-    public Terminal(int terminalId, String terminalNaziv, String terminalAirportId, Set<Flight> flightsForFlightTerminalIdTo, Set<Flight> flightsForFlightTerminalIdFrom, Set<Gate> gates) {
+    public Terminal(int terminalId, Airport airport, String terminalNaziv, Set<Flight> flightsForFlightTerminalIdTo, Set<Flight> flightsForFlightTerminalIdFrom, Set<Gate> gates) {
        this.terminalId = terminalId;
+       this.airport = airport;
        this.terminalNaziv = terminalNaziv;
-       this.terminalAirportId = terminalAirportId;
        this.flightsForFlightTerminalIdTo = flightsForFlightTerminalIdTo;
        this.flightsForFlightTerminalIdFrom = flightsForFlightTerminalIdFrom;
        this.gates = gates;
@@ -41,19 +41,19 @@ public class Terminal  implements java.io.Serializable {
     public void setTerminalId(int terminalId) {
         this.terminalId = terminalId;
     }
+    public Airport getAirport() {
+        return this.airport;
+    }
+    
+    public void setAirport(Airport airport) {
+        this.airport = airport;
+    }
     public String getTerminalNaziv() {
         return this.terminalNaziv;
     }
     
     public void setTerminalNaziv(String terminalNaziv) {
         this.terminalNaziv = terminalNaziv;
-    }
-    public String getTerminalAirportId() {
-        return this.terminalAirportId;
-    }
-    
-    public void setTerminalAirportId(String terminalAirportId) {
-        this.terminalAirportId = terminalAirportId;
     }
     public Set<Flight> getFlightsForFlightTerminalIdTo() {
         return this.flightsForFlightTerminalIdTo;

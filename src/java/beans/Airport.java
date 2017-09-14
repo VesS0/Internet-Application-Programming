@@ -1,5 +1,5 @@
 package beans;
-// Generated Sep 12, 2017 7:50:39 PM by Hibernate Tools 4.3.1
+// Generated Sep 14, 2017 1:53:59 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -17,6 +17,7 @@ public class Airport  implements java.io.Serializable {
      private String airportCountry;
      private int airportPistsNumber;
      private int airportTerminalsNumber;
+     private Set<Terminal> terminals = new HashSet<Terminal>(0);
      private Set<Flight> flightsForFlightAirportIdFrom = new HashSet<Flight>(0);
      private Set<Flight> flightsForFlightAirportIdTo = new HashSet<Flight>(0);
      private Set<Gate> gates = new HashSet<Gate>(0);
@@ -34,13 +35,14 @@ public class Airport  implements java.io.Serializable {
         this.airportPistsNumber = airportPistsNumber;
         this.airportTerminalsNumber = airportTerminalsNumber;
     }
-    public Airport(String airportId, String airportName, String airportCity, String airportCountry, int airportPistsNumber, int airportTerminalsNumber, Set<Flight> flightsForFlightAirportIdFrom, Set<Flight> flightsForFlightAirportIdTo, Set<Gate> gates, Set<Flight> flightsForFlightExpectedAirportIdTo) {
+    public Airport(String airportId, String airportName, String airportCity, String airportCountry, int airportPistsNumber, int airportTerminalsNumber, Set<Terminal> terminals, Set<Flight> flightsForFlightAirportIdFrom, Set<Flight> flightsForFlightAirportIdTo, Set<Gate> gates, Set<Flight> flightsForFlightExpectedAirportIdTo) {
        this.airportId = airportId;
        this.airportName = airportName;
        this.airportCity = airportCity;
        this.airportCountry = airportCountry;
        this.airportPistsNumber = airportPistsNumber;
        this.airportTerminalsNumber = airportTerminalsNumber;
+       this.terminals = terminals;
        this.flightsForFlightAirportIdFrom = flightsForFlightAirportIdFrom;
        this.flightsForFlightAirportIdTo = flightsForFlightAirportIdTo;
        this.gates = gates;
@@ -88,6 +90,13 @@ public class Airport  implements java.io.Serializable {
     
     public void setAirportTerminalsNumber(int airportTerminalsNumber) {
         this.airportTerminalsNumber = airportTerminalsNumber;
+    }
+    public Set<Terminal> getTerminals() {
+        return this.terminals;
+    }
+    
+    public void setTerminals(Set<Terminal> terminals) {
+        this.terminals = terminals;
     }
     public Set<Flight> getFlightsForFlightAirportIdFrom() {
         return this.flightsForFlightAirportIdFrom;

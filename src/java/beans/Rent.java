@@ -1,5 +1,5 @@
 package beans;
-// Generated Sep 12, 2017 7:50:39 PM by Hibernate Tools 4.3.1
+// Generated Sep 14, 2017 1:53:59 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
