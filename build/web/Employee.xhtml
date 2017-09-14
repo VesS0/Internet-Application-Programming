@@ -19,7 +19,7 @@
                     <b:row style="margin-top: 70px">
                         <b:column  medium-screen="6" offset="0">
                             <h:form>
-                                <b:dataTable  ajax="false" searching="false" value="#{employee.flights}" var="flight">
+                                <b:dataTable  ajax="false" searching="false" value="#{employee.flights}" var="flight" paginated="true">
                                     <b:dataTableColumn value="#{flight.flightId}" />
                                     <b:dataTableColumn value="#{flight.airportByFlightAirportIdTo.airportId}" />
                                     <b:dataTableColumn value="#{flight.airportByFlightAirportIdFrom.airportId}" />

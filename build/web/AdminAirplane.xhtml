@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <title>
+        Stewardess
+    </title>
+    <h:body>
+        <ui:composition template="templates/ControlWindowTemplate.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:alert closable="true" severity="#{adminairline.severity}" rendered="#{adminairline.message!=null}" >#{adminairline.message}</b:alert>
+                </b:row>
+                <b:container fluid="true">
+                    <b:row style="margin-top: 70px">
+                        <b:column  medium-screen="6">
+                            <h:form>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4">
+                                        <b:inputText label="Name" required="true" renderLabel="true"  placeholder="Name" 
+                                                     value="#{adminplane.airplaneName}"/>
+                                    </b:column>
+                                </b:row>
+                                 <b:row>
+                                     <b:column medium-screen="6" offset="4"><h:selectOneMenu value="#{adminplane.selectedAirline}" >
+                                             <f:selectItems value="#{adminplane.airlines}" var="airline" 
+                                                            itemValue="#{airline.airlineId}" itemLabel="#{airline.airlineName}"/><!-- .airlineId-->
+                                        </h:selectOneMenu>
+                                        
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4"><h:selectOneMenu value="#{adminplane.selectedAirplaneType}" >
+                                            <f:selectItems value="#{adminplane.types}" var="type" 
+                                                           itemValue="#{type.airplaneTypeId}" itemLabel="#{type.airplaneTypeLicence}"/> <!-- .airplaneTypeId-->
+                                        </h:selectOneMenu>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4"><h:selectOneMenu value="#{adminplane.selectedManufacturer}" >
+                                            <f:selectItems value="#{adminplane.manufacturers}" var="manuf" 
+                                                           itemValue="#{manuf.manufacturerId}" itemLabel="#{manuf.manufacturerUserName}"/> <!-- .manufacturerId-->
+                                        </h:selectOneMenu>
+                                    </b:column>
+                                </b:row>
+                                <p:fileUpload auto="true"  style="width: 100%" fileUploadListener="#{adminplane.uploadNew}" mode="advanced" 
+                                  sizeLimit="1000000000" allowTypes="/(\.|\/)(jpg|png|mp4|ogg)$/" skinSimple="true"  />
+                                
+                                <b:commandButton ajax="false" value="Add new plane" action="#{adminplane.saveAirplane()}"/>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

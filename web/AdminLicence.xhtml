@@ -1,12 +1,51 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
-    <h:head>
-        <title>Facelet Title</title>
-    </h:head>
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <title>
+        Stewardess
+    </title>
     <h:body>
-        Hello from Facelets
+        <ui:composition template="templates/ControlWindowTemplate.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:alert closable="true" severity="#{adminlic.severity}" rendered="#{adminlic.message!=null}" >#{adminlic.message}</b:alert>
+                </b:row>
+                <b:container fluid="true">
+                    <b:row style="margin-top: 70px">
+                        <b:column medium-screen="6" offset="0">
+                            <h:form>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4">
+                                        <h:selectOneMenu value="#{adminlic.selectedLicence}" >
+                                            <f:selectItems value="#{adminlic.licences}" var="licence" 
+                                                           itemValue="#{licence.airplaneTypeLicence}" itemLabel="#{licence.airplaneTypeLicence}"/>
+                                        </h:selectOneMenu>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4">
+                                        <h:selectOneMenu value="#{adminlic.username}" >
+                                            <f:selectItems value="#{adminlic.users}" var="user" 
+                                                           itemValue="#{user.userUserName}" itemLabel="#{user.userUserName}"/>
+                                        </h:selectOneMenu>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column>
+                                        <b:commandButton ajax="false" value="Add Licence" action="#{adminlic.addLicence()}"/>
+                                    </b:column>
+                                </b:row>
+                            </h:form>
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
 

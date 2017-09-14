@@ -20,11 +20,11 @@
                         <b:column medium-screen="6" offset="0">
                             <h:form>
                                 <b:row>
-                                    <b:column medium-screen="6" offset="4">
-                                        <h:selectOneMenu value="#{stewardess.selectedAirlineId}" >
+                                    <b:column medium-screen="6" offset="4"><h:selectOneMenu value="#{stewardess.selectedAirlineId}" >
                                             <f:selectItems value="#{stewardess.availableAirlines}" var="airline" 
                                                            itemValue="#{airline.airlineId}" itemLabel="#{airline.airlineName}"/>
                                         </h:selectOneMenu>
+                                        
                                     </b:column>
                                 </b:row>
                                 <b:row>

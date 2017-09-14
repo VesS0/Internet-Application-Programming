@@ -56,10 +56,14 @@ public class EmployeeController {
         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try{
-             session.beginTransaction();
-            // Query query = session.createQuery("from flight fl join fetch where fl.userByFlightCopilotId=:myUsername or fl.userByFlightPilotId=:myUsername" );
-            // query.setParameter("myUsername", LoginController.user.getUserUserName());
-            // flights = query.list();
+            session.beginTransaction();
+            Query query = session.createQuery(
+                    "from Flight fl join fetch fl.airplane "
+                    + "aplane join fetch aplane.airline aline"
+                    + " where aline.airlineId=:myAline" );
+            // Query quer = session.createQuery(" from user u join fetch u.")
+            query.setParameter("myAline", LoginController.user.getAirline());
+            flights = query.list();
             session.getTransaction().commit();
         } catch (Exception e) {
         if (session.getTransaction() != null) {

@@ -34,8 +34,27 @@ public class LoginController {
     private String password;
 
     private int alertType;
-    private String message, licence,severity="info";
+    private String message,severity="info";
     static public User user;
+    private int selectedLicence;
+    private List<Airplanetype> licences;
+
+    public int getSelectedLicence() {
+        return selectedLicence;
+    }
+
+    public void setSelectedLicence(int selectedLicence) {
+        this.selectedLicence = selectedLicence;
+    }
+
+
+    public List<Airplanetype> getLicences() {
+        return licences;
+    }
+
+    public void setLicences(List<Airplanetype> licences) {
+        this.licences = licences;
+    }
 
     public String getSeverity() {
         return severity;
@@ -43,14 +62,6 @@ public class LoginController {
 
     public void setSeverity(String severity) {
         this.severity = severity;
-    }
-
-    public String getLicence() {
-        return licence;
-    }
-
-    public void setLicence(String licence) {
-        this.licence = licence;
     }
 
     public static User getUser() {
@@ -148,9 +159,18 @@ public class LoginController {
             case "Stewardess":
                 return "Stewardess.xhtml";
             case "Pilot":
-                List<Pilotlicence> licences= GetPilotLicences(user);
-                if (licences == null)
+                List<Pilotlicence> liccc= GetPilotLicences(user);
+                if (liccc == null)
                 {
+                    Session  session = HibernateUtil.getSessionFactory().openSession();
+                    session.beginTransaction();
+                    try {
+                        this.licences = session.createQuery("from Airplanetype ").list();           
+                        session.getTransaction().commit();  
+                    } catch (Exception e) {
+                    } finally {
+                        session.close();
+                    }
                     return "pilotLicence.xhtml";
                 }
                 return "Pilot.xhtml";
@@ -193,11 +213,23 @@ public class LoginController {
     
     public String addLicence()
     {
-        if (isValidLicence(licence))
+        String licen=null;
+        Session  session1 = HibernateUtil.getSessionFactory().openSession();
+        session1.beginTransaction();
+        try {
+            Query query = session1.createQuery("from Airplanetype where airplaneTypeId=:typeId");
+            query.setParameter("typeId", selectedLicence);
+            licen = query.list().get(0).toString();            
+            session1.getTransaction().commit();  
+        } catch (Exception e) {
+        } finally {
+            session1.close();
+        }
+        if (isValidLicence(licen))
         {
             PilotlicenceId pilLilId = new PilotlicenceId();
             pilLilId.setPilotLicenceUserName(LoginController.user.getUserUserName());
-            pilLilId.setPilotLicenceLicence(licence);
+            pilLilId.setPilotLicenceLicence(licen);
             
             Pilotlicence pilLil = new Pilotlicence();
             pilLil.setId(pilLilId);
@@ -216,9 +248,9 @@ public class LoginController {
             } finally {
                 session.close();
             } 
-            return "Pilot.xhtml";
+            return "Pilot";
         }
-        return "pilotLicence.xhtml";
+        return "pilotLicence";
     }
 
 }
