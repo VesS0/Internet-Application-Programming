@@ -7,43 +7,56 @@
         <title>Facelet Title</title>
     </h:head>
     <h:body>
-        <h:form>
             <b:row>
-                <b:alert closable="true" severity="#{loginController.severity}"  rendered="#{loginController.message!=null}" >#{loginController.message}</b:alert>
-            </b:row>
-            <b:row>
-                <b:column medium-screen="6" offset="4">
-                    <b:inputText id="username" value="#{loginController.username}" label="Username" 
-                                 required="true" renderLabel="true"  placeholder="username"/>
-                </b:column>
 
-            </b:row>
-            <b:row>
                 <b:column medium-screen="6" offset="4">
-                    <b:inputSecret id="password" value="#{loginController.password}" 
-                                   required="true" renderLabel="true"  label="password" placeholder="password"/>
-                </b:column>
+                    <h:form>
+                        <b:row>
+                            <b:alert closable="true" severity="#{loginController.severity}"  rendered="#{loginController.message!=null}" >#{loginController.message}</b:alert>
+                        </b:row>
+                        <b:row>
+                            <b:column >
+                                <b:inputText id="username" value="#{loginController.username}" label="Username" 
+                                             required="true" renderLabel="true"  placeholder="username"/>
+                            </b:column>
 
-            </b:row>
-            <b:row>
-                <b:column span="6" offset="4" style="padding-bottom: 20px">
-                    <b:commandButton value="Log in"  look="primary" style="width:100%;"
-                                     action="#{loginController.userLogin()}"/>
+                        </b:row>
+                        <b:row>
+                            <b:column >
+                                <b:inputSecret id="password" value="#{loginController.password}" 
+                                               required="true" renderLabel="true"  label="password" placeholder="password"/>
+                            </b:column>
+
+                        </b:row>
+                        <b:row>
+                            <b:column  style="padding-bottom: 20px">
+                                <b:commandButton value="Log in"  look="primary" style="width:100%;"
+                                                 action="#{loginController.userLogin()}"/>
+                            </b:column>
+                        </b:row>
+                    </h:form>
+                </b:column>
+                <b:column medium-screen="6" offset="4">
+                    <h:form>
+                        <b:commandButton  value="Register" style="width:60%;" action="#{loginController.userRegister()}"/>
+                    </h:form>
+                </b:column>
+                <b:column medium-screen="6" offset="4">
+                    <h:form>
+                        <b:commandButton  value="Change password" style="width:60%;" action="#{loginController.userChangePassword()}"/>
+                    </h:form>
+                </b:column>
+                <b:column medium-screen="6" offset="4">
+                    <h:form>
+                        <b:commandButton  value="Log out" style="width:60%;" action="#{loginController.logOut()}"/>
+                    </h:form>
+                </b:column>
+                <b:column medium-screen="6" offset="4">
+                    <h:form>
+                        <b:commandButton  value="Search" style="width:30%;" action="#{loginController.searchStuff()}"/>
+                    </h:form>
                 </b:column>
             </b:row>
-        </h:form>
-        <h:form>
-                <b:commandButton  value="Register" style="width:60%;" action="#{loginController.userRegister()}"/>
-        </h:form>
-        <h:form>
-                <b:commandButton  value="Change password" style="width:60%;" action="#{loginController.userChangePassword()}"/>
-        </h:form>
-        <h:form>
-            <b:commandButton  value="Log out" style="width:60%;" action="#{loginController.logOut()}"/>
-        </h:form>
-        <h:form>
-            <b:commandButton  value="Search" style="width:30%;" action="#{loginController.searchStuff()}"/>
-        </h:form>
     </h:body>
 </html>
 

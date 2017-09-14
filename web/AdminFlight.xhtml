@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <title>
+        Stewardess
+    </title>
+    <h:body>
+        <ui:composition template="templates/ControlWindowTemplate.xhtml">
+            <ui:define name="content">
+                <b:row>
+                    <b:alert closable="true" severity="#{adminflight.severity}" rendered="#{adminflight.message!=null}" >#{adminflight.message}</b:alert>
+                </b:row>
+                <b:container fluid="true">
+                    <b:row style="margin-top: 70px">
+                        <b:column  medium-screen="6">
+                            <h:form>
+                                <b:dataTable  ajax="true" searching="false" value="#{adminairline.airlines}" var="airline">
+                                    <b:dataTableColumn>
+                                        <h:inputText value="#{airline.airlineName}">
+                                        </h:inputText> 
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn>
+                                        <h:inputText value="#{airline.airlineAddress}">
+
+                                        </h:inputText> 
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn>
+                                        <h:inputText value="#{airline.airlineCountry}">
+
+                                        </h:inputText> 
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn>
+                                        <h:inputText value="#{airline.airlineEmail}">
+
+                                        </h:inputText> 
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn>
+                                        <h:inputText value="#{airline.airlineSite}">
+
+                                        </h:inputText> 
+                                    </b:dataTableColumn>
+                                    <b:dataTableColumn>
+                                        <b:commandButton ajax="true" value="Save" action="#{adminairline.save(airline)}"/>
+                                    </b:dataTableColumn> 
+                                </b:dataTable>
+                                <b:commandButton ajax="true" value="New" action="#{adminairline.addNewArline()}"/>
+                            </h:form>
+
+
+                            <h:form>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4">
+                                        <b:inputText label="Name" required="true" renderLabel="true"  placeholder="Name" 
+                                                     value="#{adminairline.airlineName}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4">
+                                        <b:inputText label="Address" required="true" renderLabel="true"  placeholder="Address" 
+                                                     value="#{adminairline.airlineAddress}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4">
+                                        <b:inputText label="Country" required="true" renderLabel="true"  placeholder="Country" 
+                                                     value="#{adminairline.airlineCountry}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4">
+                                        <b:inputText label="Email" required="true" renderLabel="true"  placeholder="Email" 
+                                                     value="#{adminairline.airlineEmail}"/>
+                                    </b:column>
+                                </b:row>
+                                <b:row>
+                                    <b:column medium-screen="6" offset="4">
+                                        <b:inputText label="Site" required="true" renderLabel="true"  placeholder="Site" 
+                                                     value="#{adminairline.airlineSite}"/>
+                                    </b:column>
+                                </b:row>
+
+                                <b:commandButton ajax="false" value="Add new" action="#{adminairline.addNewArline()}"/>
+                            </h:form>
+
+
+                        </b:column>
+                    </b:row>
+                </b:container>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

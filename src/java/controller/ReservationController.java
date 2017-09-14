@@ -6,6 +6,7 @@
 package controller;
 
 import beans.Flight;
+import java.util.Random;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import org.hibernate.Session;
@@ -94,7 +95,9 @@ public class ReservationController {
                 session.close();
             }
         severity="success";
-        generatedPassword= "9302-9201";
+        String val1 = ""+((int)(Math.random()*9000)+1000);
+        String val2 = ""+((int)(Math.random()*9000)+1000);
+        generatedPassword=val1+"-"+val2;// "9302-9201";
         message = "Reservation successfull! Your generated password is: "+generatedPassword;
     }
 }

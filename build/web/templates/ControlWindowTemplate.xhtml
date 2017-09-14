@@ -14,10 +14,21 @@
         </title>
     </h:head>
     <h:body>
-    YOU WON 100 MILION DOLLARS, CLICK HERE FAST BEFORE THIS OFFER EXPIRES        
+
         <b:container>
             <b:row>
                 <b:column medium-screen="10">
+                    <h:form>
+                        <b:navBar >
+                            <b:navbarLinks>
+                                <b:navCommandLink value="Register" action="#{loginController.userRegister()}"></b:navCommandLink>
+                                <b:navCommandLink  value="Change password" action="#{loginController.userChangePassword()}"></b:navCommandLink>
+                                <b:navCommandLink  value="Log out" action="#{loginController.logOut()}"></b:navCommandLink>
+                                <b:navCommandLink  value="Search" action="#{loginController.searchStuff()}"></b:navCommandLink>
+
+                            </b:navbarLinks>
+                        </b:navBar>
+                    </h:form>
                     <ui:insert name="content"/>
                 </b:column>
             </b:row>

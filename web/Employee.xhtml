@@ -60,6 +60,20 @@
                                 </b:dataTable>
                             </h:form>
                         </b:column>
+                           <b:column  medium-screen="6">
+                            <h:form>
+                                <b:dataTable  ajax="true" searching="false" value="#{employee.requestedRents}" var="rent" paginated="true">
+                                    <b:dataTableColumn value="#{rent.rentDateFrom}" />
+                                    <b:dataTableColumn value="#{rent.rentDateTo}" />
+                                    <b:dataTableColumn value="#{rent.rentPrice}" />
+                                    <b:dataTableColumn>
+                                        <b:column>
+                                            <b:commandButton ajax="false" value="Accept Rent" action="#{employee.AcceptRent(rent)}"/>
+                                        </b:column>
+                                    </b:dataTableColumn> 
+                                </b:dataTable>
+                            </h:form>
+                        </b:column>
                     </b:row>
                 </b:container>
             </ui:define>

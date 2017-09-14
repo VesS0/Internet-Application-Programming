@@ -8,6 +8,7 @@ package controller;
 import beans.Airline;
 import beans.Airplane;
 import beans.Flight;
+import beans.Rent;
 import beans.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -32,6 +33,24 @@ public class EmployeeController {
     private String severity="info";
     private List<Airplane> freePlanes;
     private User airlin;
+    private List<Rent> requestedRents;
+
+    public User getAirlin() {
+        return airlin;
+    }
+
+    public void setAirlin(User airlin) {
+        this.airlin = airlin;
+    }
+
+    public List<Rent> getRequestedRents() {
+        return requestedRents;
+    }
+
+    public void setRequestedRents(List<Rent> requestedRents) {
+        this.requestedRents = requestedRents;
+    }
+    
     public List<Airplane> getFreePlanes() {
         return freePlanes;
     }
@@ -92,7 +111,7 @@ public class EmployeeController {
         } finally {
             session.close();
         } 
-        
+        {
         Session session2 = hibernate.HibernateUtil.getSessionFactory().openSession();
         try{
             session2.beginTransaction();
@@ -108,8 +127,25 @@ public class EmployeeController {
         } finally {
             session2.close();
         } 
-       
-        
+        }
+        {
+        Session session2 = hibernate.HibernateUtil.getSessionFactory().openSession();
+        try{
+            session2.beginTransaction();
+             int notTaken = 8;
+            Query qqq = session2.createQuery("from Rent where rentAirlineId=:myAirline and rentIsAccepted=:status");
+            qqq.setParameter("myAirline",airlin.getAirline().getAirlineId());
+            qqq.setParameter("status", false);
+            requestedRents = qqq.list();
+            session2.getTransaction().commit();
+        } catch (Exception e) {
+        if (session2.getTransaction() != null) {
+        session2.getTransaction().commit();
+        }
+        } finally {
+            session2.close();
+        } 
+        }
     }
     
     public void AddAirplane(Airplane plane)
@@ -146,5 +182,25 @@ public class EmployeeController {
             session.close();
         } 
         freePlanes.remove(plane);
+    }
+    
+    
+    public void AcceptRent(Rent r)
+    {
+        r.setRentIsAccepted(true);
+        SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        try{
+            session.beginTransaction();
+            session.update(r);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+        if (session.getTransaction() != null) {
+        session.getTransaction().commit();
+        }
+        } finally {
+            session.close();
+        } 
+        requestedRents.remove(r);
     }
 }

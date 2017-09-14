@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -27,7 +28,7 @@ import org.hibernate.cfg.Configuration;
 
 
 @ManagedBean(name = "loginController")
-@RequestScoped
+@SessionScoped
 public class LoginController {
 
     private String username;
@@ -36,14 +37,14 @@ public class LoginController {
     private int alertType;
     private String message,severity="info";
     static public User user;
-    private int selectedLicence;
+    private String selectedLicence;
     private List<Airplanetype> licences;
 
-    public int getSelectedLicence() {
+    public String getSelectedLicence() {
         return selectedLicence;
     }
 
-    public void setSelectedLicence(int selectedLicence) {
+    public void setSelectedLicence(String selectedLicence) {
         this.selectedLicence = selectedLicence;
     }
 
@@ -196,9 +197,10 @@ public class LoginController {
         return str;
     }
     
-    public void LogOut()
+    public String logOut()
     {
-        // user=null;
+        user=null;
+        return "index";
     }
     public String searchStuff()
     {
@@ -213,23 +215,12 @@ public class LoginController {
     
     public String addLicence()
     {
-        String licen=null;
-        Session  session1 = HibernateUtil.getSessionFactory().openSession();
-        session1.beginTransaction();
-        try {
-            Query query = session1.createQuery("from Airplanetype where airplaneTypeId=:typeId");
-            query.setParameter("typeId", selectedLicence);
-            licen = query.list().get(0).toString();            
-            session1.getTransaction().commit();  
-        } catch (Exception e) {
-        } finally {
-            session1.close();
-        }
-        if (isValidLicence(licen))
+       
+        if (isValidLicence(selectedLicence))
         {
             PilotlicenceId pilLilId = new PilotlicenceId();
             pilLilId.setPilotLicenceUserName(LoginController.user.getUserUserName());
-            pilLilId.setPilotLicenceLicence(licen);
+            pilLilId.setPilotLicenceLicence(selectedLicence);
             
             Pilotlicence pilLil = new Pilotlicence();
             pilLil.setId(pilLilId);

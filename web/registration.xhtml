@@ -50,7 +50,7 @@
                          </b:row>
                         <b:row>
                             <b:column medium-screen="6" offset="4">
-                                    <b:dateTimePicker value="#//{registerController.user.userDayOfBirth}"
+                                    <b:dateTimePicker value="#{registerController.user.userDayOfBirth}"
                                     allow-input-toggle="true"
                                     mode="false"
                                     side-by-side="false"
@@ -82,7 +82,11 @@
                                              value="#{registerController.user.userEmail}" />
                             </b:column>
                         </b:row>
-                         <b:commandButton  value="REGISTER HERE MY FRIEND" style="width:100%;" action="#{registerController.registerUser()}"/>
+                          <b:row>
+                            <b:column>
+                         <b:commandButton  value="Register" style="width:50%;" action="#{registerController.registerUser()}"/>
+                            </b:column>
+                          </b:row>
                     </h:form>
                 </b:container>
             </ui:define>
