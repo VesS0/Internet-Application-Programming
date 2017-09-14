@@ -132,8 +132,7 @@ public class EmployeeController {
         Session session2 = hibernate.HibernateUtil.getSessionFactory().openSession();
         try{
             session2.beginTransaction();
-             int notTaken = 8;
-            Query qqq = session2.createQuery("from Rent where rentAirlineId=:myAirline and rentIsAccepted=:status");
+            Query qqq = session2.createQuery("from Rent ren join fetch ren.airplane air join fetch air.airline line where ren.rentIsAccepted=:status and line.airlineId=:myAirline ");
             qqq.setParameter("myAirline",airlin.getAirline().getAirlineId());
             qqq.setParameter("status", false);
             requestedRents = qqq.list();
@@ -157,7 +156,8 @@ public class EmployeeController {
         Session session = sessionFactory.openSession();
         try{
             session.beginTransaction();
-            dbPlane = (Airplane) session.createQuery("from Airplane where airplaneId=:planeId").setParameter("planeId", plane.getAirplaneId()).list().get(0);
+            dbPlane = (Airplane) session.createQuery("from Airplane where airplaneId=:planeId")
+                    .setParameter("planeId", plane.getAirplaneId()).list().get(0);
             session.getTransaction().commit();
         } catch (Exception e) {
         if (session.getTransaction() != null) {

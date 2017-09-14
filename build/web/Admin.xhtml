@@ -10,6 +10,18 @@
         Stewardess
     </title>
     <h:body>
+        <style>
+        </style>
+        <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+</script>
         <ui:composition template="templates/ControlWindowTemplate.xhtml">
             <ui:define name="content">
                 <b:row>
@@ -47,6 +59,18 @@
                                 <b:column medium-screen="6">
                                     <b:commandButton ajax="false" value="Administer flights" action="AdminFlight.xhtml"/>
                                 </b:column >
+                            </b:row>
+                                <b:row>
+                                        <b:column>
+                                    <div class="fb-share-button" data-href="https://showcase.bootsfaces.net/" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fshowcase.bootsfaces.net%2F&amp;src=sdkpreparse">Share</a></div>
+                                    </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column>
+                                    <a class="twitter-share-button"
+  href="https://twitter.com/intent/tweet?text=Vesic%20is%20sharing%20PIA%20Projeect">
+Tweet</a>
+                                </b:column>
                             </b:row>
                         </b:form>
                     </b:row>

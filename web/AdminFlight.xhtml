@@ -16,79 +16,170 @@
                     <b:alert closable="true" severity="#{adminflight.severity}" rendered="#{adminflight.message!=null}" >#{adminflight.message}</b:alert>
                 </b:row>
                 <b:container fluid="true">
-                    <b:row style="margin-top: 70px">
-                        <b:column  medium-screen="6">
-                            <h:form>
-                                <b:dataTable  ajax="true" searching="false" value="#{adminairline.airlines}" var="airline">
-                                    <b:dataTableColumn>
-                                        <h:inputText value="#{airline.airlineName}">
-                                        </h:inputText> 
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn>
-                                        <h:inputText value="#{airline.airlineAddress}">
+           <b:row>
+                    <b:column>
+                        <h:form>
+                            <b:row>
+                                <b:column>
+                                    <b:dateTimePicker allow-input-toggle="true"
+                                                      mode="false"
+                                                      side-by-side="false"
+                                                      show-date="true"
+                                                      show-time="false"
+                                                      use-current="true"
+                                                      value="#{adminflight.flightTakeOffTime}">                      
+                                    </b:dateTimePicker>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column>
+                                    <b:dateTimePicker allow-input-toggle="true"
+                                                      mode="false"
+                                                      side-by-side="false"
+                                                      show-date="true"
+                                                      show-time="false"
+                                                      use-current="true"
+                                                      value="#{adminflight.flightLandingTime}">                             
+                                    </b:dateTimePicker>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column medium-screen="6" offset="0"  >
+                                    Enter number of people
+                                    <p:spinner  min="0" max="999" style="width:75px" value="#{adminflight.flightNumber}"/>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column>
+                                    <b:selectBooleanCheckbox value="#{adminflight.isReturn}" label="Return flight">
 
-                                        </h:inputText> 
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn>
-                                        <h:inputText value="#{airline.airlineCountry}">
+                                    </b:selectBooleanCheckbox>
 
-                                        </h:inputText> 
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn>
-                                        <h:inputText value="#{airline.airlineEmail}">
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                                <b:column>
+                                    <b:selectBooleanCheckbox value="#{adminflight.isCharter}" label="Charter flight">
 
-                                        </h:inputText> 
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn>
-                                        <h:inputText value="#{airline.airlineSite}">
+                                    </b:selectBooleanCheckbox>
 
-                                        </h:inputText> 
-                                    </b:dataTableColumn>
-                                    <b:dataTableColumn>
-                                        <b:commandButton ajax="true" value="Save" action="#{adminairline.save(airline)}"/>
-                                    </b:dataTableColumn> 
-                                </b:dataTable>
-                                <b:commandButton ajax="true" value="New" action="#{adminairline.addNewArline()}"/>
-                            </h:form>
-
-
-                            <h:form>
-                                <b:row>
-                                    <b:column medium-screen="6" offset="4">
-                                        <b:inputText label="Name" required="true" renderLabel="true"  placeholder="Name" 
-                                                     value="#{adminairline.airlineName}"/>
-                                    </b:column>
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="6" offset="4">
-                                        <b:inputText label="Address" required="true" renderLabel="true"  placeholder="Address" 
-                                                     value="#{adminairline.airlineAddress}"/>
-                                    </b:column>
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="6" offset="4">
-                                        <b:inputText label="Country" required="true" renderLabel="true"  placeholder="Country" 
-                                                     value="#{adminairline.airlineCountry}"/>
-                                    </b:column>
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="6" offset="4">
-                                        <b:inputText label="Email" required="true" renderLabel="true"  placeholder="Email" 
-                                                     value="#{adminairline.airlineEmail}"/>
-                                    </b:column>
-                                </b:row>
-                                <b:row>
-                                    <b:column medium-screen="6" offset="4">
-                                        <b:inputText label="Site" required="true" renderLabel="true"  placeholder="Site" 
-                                                     value="#{adminairline.airlineSite}"/>
-                                    </b:column>
-                                </b:row>
-
-                                <b:commandButton ajax="false" value="Add new" action="#{adminairline.addNewArline()}"/>
-                            </h:form>
-
-
-                        </b:column>
+                                </b:column>
+                            </b:row>
+                            <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.selectedAirplane}">
+                                    <f:selectItems value="#{adminflight.airplanes}" var="airplanes" 
+                                                   itemValue="#{airplanes.airplaneId}" itemLabel="#{airplanes.airplaneName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                            <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.selectedAirportFrom}">
+                                    <f:selectItems value="#{adminflight.airports}" var="airports" 
+                                                   itemValue="#{airports.airportId}" itemLabel="#{airports.airportName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                             <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.selectedAirportTo}">
+                                    <f:selectItems value="#{adminflight.airports}" var="airports" 
+                                                   itemValue="#{airports.airportId}" itemLabel="#{airports.airportName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                            <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.selectedGateOne}">
+                                    <f:selectItems value="#{adminflight.gates}" var="gates" 
+                                                   itemValue="#{gates.gateId}" itemLabel="#{gates.gateName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                            <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.selectedGateTwo}">
+                                    <f:selectItems value="#{adminflight.gates}" var="gates" 
+                                                   itemValue="#{gates.gateId}" itemLabel="#{gates.gateName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                            <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.selectedTerminalOne}">
+                                    <f:selectItems value="#{adminflight.terminals}" var="terminals" 
+                                                   itemValue="#{terminals.terminalId}" itemLabel="#{terminals.terminalNaziv}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                            <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.selectedTerminalTwo}">
+                                    <f:selectItems value="#{adminflight.terminals}" var="terminals" 
+                                                   itemValue="#{terminals.terminalId}" itemLabel="#{terminals.terminalNaziv}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                             <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.crew[0]}">
+                                    <f:selectItems value="#{adminflight.pilots}" var="pilots" 
+                                                   itemValue="#{pilots.userUserName}" itemLabel="#{pilots.userUserName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                             <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.crew[1]}">
+                                    <f:selectItems value="#{adminflight.pilots}" var="pilots" 
+                                                   itemValue="#{pilots.userUserName}" itemLabel="#{pilots.userUserName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                            <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.crew[2]}">
+                                    <f:selectItems value="#{adminflight.stewardess}" var="stewardess" 
+                                                   itemValue="#{stewardess.userUserName}" itemLabel="#{stewardess.userUserName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                          <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.crew[3]}">
+                                    <f:selectItems value="#{adminflight.stewardess}" var="stewardess" 
+                                                   itemValue="#{stewardess.userUserName}" itemLabel="#{stewardess.userUserName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                         <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.crew[4]}">
+                                    <f:selectItems value="#{adminflight.stewardess}" var="stewardess" 
+                                                   itemValue="#{stewardess.userUserName}" itemLabel="#{stewardess.userUserName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                          <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.crew[5]}">
+                                    <f:selectItems value="#{adminflight.stewardess}" var="stewardess" 
+                                                   itemValue="#{stewardess.userUserName}" itemLabel="#{stewardess.userUserName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                          <b:row>
+                             <b:column medium-screen="6" offset="4">
+                               <h:selectOneMenu value="#{adminflight.crew[6]}">
+                                    <f:selectItems value="#{adminflight.stewardess}" var="stewardess" 
+                                                   itemValue="#{stewardess.userUserName}" itemLabel="#{stewardess.userUserName}"/>
+                               </h:selectOneMenu>
+                            </b:column>
+                         </b:row>
+                            <b:commandButton ajax="false" value="Add new flight" action="#{adminflight.addInfo()}"/>
+                        </h:form>
+                    </b:column>
                     </b:row>
                 </b:container>
             </ui:define>

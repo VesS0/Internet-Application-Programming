@@ -25,7 +25,10 @@
                         <b:row>
                             <b:column medium-screen="6" offset="4">
                                 <b:inputSecret required="true" renderLabel="true"  label="Password" placeholder="password"
-                                               value="#{registerController.user.userPassword}"/>
+                                               value="#{registerController.user.userPassword}" validatorMessage="not strong enough password">
+                                    <f:validateRegex pattern="((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})"/>
+
+                                </b:inputSecret>
                             </b:column>
                         </b:row>
                         <b:row>
@@ -79,7 +82,9 @@
                         <b:row>
                             <b:column medium-screen="6" offset="4">
                                 <b:inputText required="true" renderLabel="true"  label="Email" placeholder="Email"
-                                             value="#{registerController.user.userEmail}" />
+                                             value="#{registerController.user.userEmail}" validatorMessage="Invalid regex">
+                                 <f:validateRegex pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+                                </b:inputText>
                             </b:column>
                         </b:row>
                           <b:row>
