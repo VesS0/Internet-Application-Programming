@@ -49,17 +49,15 @@
                         </b:column>
                          <b:column  medium-screen="6">
                             <h:form>
-                            <b:row>
-                                 <b:column medium-screen="6" offset="4">
-                                   <h:selectOneMenu value="#{pilot.selectedAirline}">
-                                        <f:selectItems value="#{pilot.availableAirlines}" var="airline" 
-                                                       itemValue="#{airline.airlineId}" itemLabel="#{airline.airlineName}"/>
-                                   </h:selectOneMenu>
-                                </b:column>
-                             </b:row>
-                                <b:row>
-                                    <b:commandButton ajax="false" value="Change Company" action="#{pilot.changeCompany()}"/>
-                                </b:row>
+                                <b:dataTable  ajax="true" searching="false" value="#{employee.freePlanes}" var="plane" paginated="true">
+                                    <b:dataTableColumn value="#{plane.airplaneName}" />
+                                    <b:dataTableColumn value="#{plane.airplaneId}" />
+                                    <b:dataTableColumn>
+                                        <b:column>
+                                            <b:commandButton ajax="false" value="Add in my company" action="#{employee.AddAirplane(plane)}"/>
+                                        </b:column>
+                                    </b:dataTableColumn> 
+                                </b:dataTable>
                             </h:form>
                         </b:column>
                     </b:row>
