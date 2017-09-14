@@ -23,10 +23,9 @@
                                     <b:dataTableColumn value="#{flight.flightId}" />
                                     <b:dataTableColumn value="#{flight.airportByFlightAirportIdTo.airportId}" />
                                     <b:dataTableColumn value="#{flight.airportByFlightAirportIdFrom.airportId}" />
-                                    <b:dataTableColumn value="#{flight.airportId}" />
                                     <b:dataTableColumn>
-                                        <b:column>
-                                            <h:selectOneMenu value="#{pilot.status}">
+                                        <!--<b:column>
+                                            <h:selectOneMenu value="#//pilot.status}">
                                                 <f:selectItem value="PlaneTookOff"
                                                                itemValue="PlaneTookOff" itemLabel="PlaneTookOff"/>
                                                 <f:selectItem value="PlanChange"
@@ -42,8 +41,8 @@
                                             </h:selectOneMenu>
                                         </b:column>
                                         <b:column>
-                                            <b:commandButton ajax="false" value="Update flight status" action="#{pilot.updateFlightStatus(flight)}"/>
-                                        </b:column>
+                                            <b:commandButton ajax="false" value="Update flight status" action="#//{pilot.updateFlightStatus(flight)}"/>
+                                        </b:column>-->
                                     </b:dataTableColumn> 
                                 </b:dataTable>
                             </h:form>

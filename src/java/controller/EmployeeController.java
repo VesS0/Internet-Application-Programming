@@ -5,7 +5,11 @@
  */
 package controller;
 
+import beans.Airline;
 import beans.Flight;
+import beans.User;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -53,17 +57,28 @@ public class EmployeeController {
         @PostConstruct
     public void LoadMyCOmpanyFlights()
     {
+        
         SessionFactory sessionFactory = hibernate.HibernateUtil.getSessionFactory();
         Session session = sessionFactory.openSession();
         try{
             session.beginTransaction();
+            
+            Query quer2 = session.createQuery("from User u join fetch u.airline alin where u.userUserName=:me");
+            quer2.setParameter("me", LoginController.user.getUserUserName());
+            User airlin = (User) quer2.list().get(0);
             Query query = session.createQuery(
                     "from Flight fl join fetch fl.airplane "
                     + "aplane join fetch aplane.airline aline"
                     + " where aline.airlineId=:myAline" );
-            // Query quer = session.createQuery(" from user u join fetch u.")
-            query.setParameter("myAline", LoginController.user.getAirline());
+            query.setParameter("myAline", airlin.getAirline().getAirlineId());
+            
+            Query queryy = session.createQuery(
+                    "from Flight where flightTakeOffTime>=:datetime or "
+                    + "flightLandingTime=:datetime");
+            queryy.setParameter("datetime", (new SimpleDateFormat("yyyy-MM-dd")).format(new Date()));
+            List<Flight> flightsGood = queryy.list();
             flights = query.list();
+            flights.retainAll(flightsGood);
             session.getTransaction().commit();
         } catch (Exception e) {
         if (session.getTransaction() != null) {
